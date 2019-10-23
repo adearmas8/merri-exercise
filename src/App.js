@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+
+import ConverterForm from "./components/ConverterForm";
+import ShortURLRedirectComponent from "./components/ShortURLRedirectComponent";
+import ViewURLSComponent from "./components/ViewURLSComponent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // using a short-urls route within the application itself
+      <CenteredContentDiv>
+      <Router>
+          <Switch>
+            <Route path={`/short-url/:shortURL`} component={ShortURLRedirectComponent} />
+            <Route path="/view-urls" component={ViewURLSComponent} />
+            <Route path="/" component={ConverterForm}/>
+          </Switch>
+      </Router>
+    </CenteredContentDiv>
   );
 }
 
 export default App;
+
+
+const CenteredContentDiv = styled.div`
+    text-align: center;
+`;
